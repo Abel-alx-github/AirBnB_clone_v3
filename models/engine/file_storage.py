@@ -70,6 +70,7 @@ class FileStorage:
         self.reload()
 
     def get(self, cls, id):
+        ''' get the obj'''
         objs = self.__objects.values()
         for obj in objs:
             if obj.id == id:
@@ -77,6 +78,7 @@ class FileStorage:
         return None
 
     def count(self, cls=None):
+        """count the instance """
         count = 0
         if cls:
             all = self.__objects.keys()

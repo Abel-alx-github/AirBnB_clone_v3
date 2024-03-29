@@ -118,7 +118,25 @@ class TestFileStorage(unittest.TestCase):
     class TestCountGet(unittest.TestCase):
         """test get and count method """
 
+        def test_get(self):
+            """Test that the get method properly retrievs objects"""
+            storage = FileStorage()
+            self.assertIs(storage.get("User", "blah"), None)
+            self.assertIs(storage.get("ab", "ab"), None)
+            new_user = User()
+            new_user.save()
+            self.assertIs(storage.get("User", new_user.id), new_user)
+
+        @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
+                         "not testing file storage")
         def test_count(self):
             """ test the cout method"""
-            total = models.storage.all()
-            self.assertEqual(len(total),  storage.count())
+            storage = FileStorage()
+            initial_length = len(storage.all())
+            self.assertEqual(storage.count(), initial_length)
+            state_len = len(storage.all("State"))
+            self.assertEqual(storage.count("State"), state_len)
+            new_state = State()
+            new_state.save()
+            self.assertEqual(storage.count(), initial_length + 1)
+            self.assertEqual(storage.count("State"), state_len + 1)
