@@ -70,14 +70,15 @@ class FileStorage:
         self.reload()
 
     def get(self, cls, id):
-        if cls is not None and type(cls) is str and id is not None and\
-              type(id) is str and cls in classes:
-             key = cls + '.' + id
-             return self.__objects.get(key, None)
-
-        return None
+        ''' get the obj'''
+      if cls in classes:
+          objs = self.__objects.values()
+          for obj in objs:
+              if obj.id == id:
+                  return obj
 
     def count(self, cls=None):
+        """count the instance """
         count = 0
         if type(cls) == str and cls in classes:
             count += len(self.all())
