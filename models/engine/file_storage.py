@@ -71,12 +71,11 @@ class FileStorage:
 
     def get(self, cls, id):
         if cls is not None and type(cls) is str and id is not None and\
-           type(id) is str and cls in classes
-            objs = self.__objects.values()
-            for obj in objs:
-                if obj.id == id:
-                    return obj
-            return None
+              type(id) is str and cls in classes:
+             key = cls + '.' + id
+             return self.__objects.get(key, None)
+
+        return None
 
     def count(self, cls=None):
         count = 0
