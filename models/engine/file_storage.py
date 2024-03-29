@@ -71,23 +71,17 @@ class FileStorage:
 
     def get(self, cls, id):
         ''' get the obj'''
-        objs = self.__objects.values()
-        for obj in objs:
-            if obj.id == id:
-                return obj
-        return None
+      if cls in classes:
+          objs = self.__objects.values()
+          for obj in objs:
+              if obj.id == id:
+                  return obj
 
     def count(self, cls=None):
         """count the instance """
         count = 0
-        if cls:
-            all = self.__objects.keys()
-            for obj in all:
-                cls_name = obj.split('.')[0]
-                if cls_name == cls.__name__:
-                    count += 1
-        else:
-            all = self.__objects.keys()
-            for obj in all:
-                count += 1
+        if type(cls) == str and cls in classes:
+            count += len(self.all())
+        elif (cls == None):
+             count = len(self.__objects)
         return count
