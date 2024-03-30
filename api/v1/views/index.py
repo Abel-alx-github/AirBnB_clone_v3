@@ -8,7 +8,7 @@ from models.amenity import Amenity
 from models.city import City
 from models.user import User
 from models.review import Review
-
+from models.place import Place
 
 @app_views.route('/status', strict_slashes=False)
 def status():
@@ -20,6 +20,7 @@ def stats():
     dic = {}
     dic['amenities'] = storage.count(Amenity)
     dic['cities'] = storage.count(City)
+    dic ['places'] = storage.count(Place)
     dic['reviews'] = storage.count(Review)
     dic['states'] = storage.count(State)
     dic['users'] = storage.count(User)
