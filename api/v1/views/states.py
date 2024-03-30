@@ -8,7 +8,7 @@ from api.v1.views import app_views
 
 @app_views.route('/states', methods=['GET'], strict_slashes=False)
 def get_all_states():
-    states = storage.all('State')
+    states = storage.all('State').values()
     if states:
         state_list = [state.to_dict() for state in states.values()]
         return jsonify(state_list)
