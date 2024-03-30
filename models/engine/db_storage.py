@@ -77,7 +77,7 @@ class DBStorage:
 
     def get(self, cls, id):
         ''' get the obj by id'''
-        if cls:
+        if cls in classes.values():
             re = self.__session.query(cls).all()
             for i in re:
                 if i.id == id:
@@ -87,9 +87,9 @@ class DBStorage:
     def count(self, cls=None):
         ''' count the obj'''
         count = 0
-        if cls:
+        if cls in classes.values():
             count = self.__session.query(cls).count()
-        else:
+        elif (cls is None):
             for cls in classes.values():
                 count += self.__session.query(cls).count()
         return count
