@@ -11,7 +11,7 @@ from models import storage
 @app_views.route('/amenities', methods=['GET', 'POST'], strict_slashes=False)
 def get_amenity():
     """ get amenities"""
-    if request.method == 'POST':
+    if request.method == 'GET':
         amenity = storage.all(Amenity)
         amenity_list = []
         for item in amenity.values():
