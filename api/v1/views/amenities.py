@@ -62,6 +62,4 @@ def put_update(amenity_id):
         if k not in ignor:
             setattr(amenity, k, v)
     amenity.save()
-    storage.new(amenity)
-    storage.save()
     return jsonify(amenity.to_dict()), 200
