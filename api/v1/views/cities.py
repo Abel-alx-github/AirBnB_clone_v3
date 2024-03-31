@@ -49,7 +49,7 @@ def post_city(state_id):
     if not state:
         abort(404)
     data = request.get_json()
-    if not data:
+    if not request.get_json():
         abort(404, description='NOT a JSON')
     if 'name' not in data:
         abort(404, description='Missing name')
@@ -66,9 +66,9 @@ def put_or_update(city_id):
     if not city:
         abort(404)
     data = request.get_json()
-    if not data:
+    if not request.get_json():
         abort(404, 'Not a JSON')
-    ignore = ['id', 'created_at', 'updated_at']
+    ignore = ['id', 'state_id','created_at', 'updated_at']
     for k, v in data.items():
         if k not in ignore:
             setattr(city, k, v)
