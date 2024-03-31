@@ -7,7 +7,6 @@ from flask import request, abort, jsonify
 from api.v1.views import app_views
 
 
-
 @app_views.route('/amenities', methods=['GET', 'POST'], strict_slashes=False)
 def get_amenity():
     """ get amenities"""
