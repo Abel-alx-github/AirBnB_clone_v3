@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 """defin aminity query methods """
 
+from models import storage
 from models.amenity import Amenity
 from flask import request, abort, jsonify
 from api.v1.views import app_views
 
-from models import storage
 
 
 @app_views.route('/amenities', methods=['GET', 'POST'], strict_slashes=False)
@@ -13,10 +13,8 @@ def get_amenity():
     """ get amenities"""
     if request.method == 'GET':
         amenity = storage.all(Amenity)
-        amenity_list = []
-        for item in amenity.values():
-            amenity_list.append(item.to_dict())
-        return jsonify(amenity_list), 200
+        amenity_list = [obj.to_dict() for obj in amenity.values()]
+        return jsonify(amenity_list)
     elif request.method == 'POST':
         if not request.get_json():
             abort(400, 'Not a JSON')
@@ -36,7 +34,7 @@ def get_amenity_by_id(amenity_id):
     if not amenity:
         abort(404)
     if request.method == 'GET':
-        return jsonify(amenity.to_dict()), 200
+        return jsonify(amenity.to_dict())
     elif request.method == 'DELETE':
         storage.delete(amenity)
         storage.save()
