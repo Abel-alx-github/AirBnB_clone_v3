@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" """
+"""defin aminity query methods """
 
 from models.amenity import Amenity
 from flask import request, abort, jsonify
@@ -10,7 +10,7 @@ from models import storage
 
 @app_views.route('/amenities', methods=['GET'], strict_slashes=False)
 def get_amenity():
-    """ """
+    """ get amenities"""
     amenity = storage.all(Amenity)
     amenity_list = []
     for item in amenity.values():
@@ -21,7 +21,7 @@ def get_amenity():
 @app_views.route('/amenities/<amenity_id>', methods=['GET', 'DELETE'],
                  strict_slashes=False)
 def get_amenity_by_id(amenity_id):
-    """ """
+    """get aminity by id """
     amenity = storage.get(Amenity, amenity_id)
     if not amenity:
         abort(404)
@@ -36,7 +36,7 @@ def get_amenity_by_id(amenity_id):
 @app_views.route('/amenities', methods=['POST'],
                  strict_slashes=False)
 def post_amenity():
-    """ """
+    """post amenity  """
     if not request.get_json():
         abort(400, 'Not a JSON')
     data = request.get_json()
@@ -50,7 +50,7 @@ def post_amenity():
 @app_views.route('/amenities/<amenity_id>', methods=['PUT'],
                  strict_slashes=False)
 def put_update(amenity_id):
-    """ """
+    """update amenity """
     if not request.get_json():
         abort(400, 'Not a JSON')
     data = request.get_json()
