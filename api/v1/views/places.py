@@ -46,7 +46,7 @@ def get_places_of_city(city_id):
         return jsonify(new_place.to_dict()), 201
 
 
-@app_views.route('/places/<place_id>', methods=['GET', 'DELETE'],
+@app_views.route('/places/<place_id>', methods=['GET', 'DELETE', 'PUT'],
                  strict_slashes=False)
 def get_place_by_id(place_id):
     """ retrive place by its id"""
