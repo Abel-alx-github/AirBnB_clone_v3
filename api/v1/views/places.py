@@ -2,9 +2,9 @@
 """ define method to handle place query"""
 
 from models import storage
-from models.places import Place
-from models.cities import City
-from models.users import User
+from models.place import Place
+from models.city import City
+from models.user import User
 from api.v1.views import app_views
 from flask import jsonify, abort, request
 
