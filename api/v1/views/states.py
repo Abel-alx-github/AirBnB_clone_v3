@@ -10,7 +10,7 @@ from api.v1.views import app_views
 def get_all_states():
     """ retrive states"""
     states = storage.all(State).values()
-    if not state:
+    if not states:
         abort(404)
     if states:
         state_list = [state.to_dict() for state in states]
