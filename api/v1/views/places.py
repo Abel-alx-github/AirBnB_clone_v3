@@ -60,6 +60,7 @@ def get_place_by_id(place_id):
         if not place:
             abort(404)
         storage.delete(place)
+        storage.save()
         return jsonify({}), 200
     elif request.method == 'PUT':
         if not request.get_json():
