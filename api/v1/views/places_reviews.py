@@ -21,7 +21,7 @@ def get_place_review(place_id):
         if reviews:
             reviews_list = [review.to_dict() for review in reviews
                             if review.place_id == place_id]
-            return jsonify(reviews_list), 200
+            return jsonify(reviews_list)
     elif request.method == 'POST':
         if not request.get_json():
             abort(400, 'Not a JSON')
@@ -49,7 +49,7 @@ def get_review_by_id(review_id):
         review = storage.get(Review, review_id)
         if not review:
             abort(404)
-        return jsonify(review.to_dict()), 200
+        return jsonify(review.to_dict())
     elif request.method == 'DELETE':
         review = storage.get(Review, review_id)
         if not review:
