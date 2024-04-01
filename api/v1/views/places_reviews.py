@@ -71,4 +71,4 @@ def get_review_by_id(review_id):
             if k not in ignor:
                 setattr(review, k, v)
         review.save()
-        return jsonify(review.to_dict()), 200
+        return jsonify(review.to_dict())
