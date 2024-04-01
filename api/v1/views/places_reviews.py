@@ -28,11 +28,11 @@ def get_place_review(place_id):
         data = request.get_json()
         if not data:
             abort(404)
+        if 'user_id' not in data:
+            abort(400, 'Missing user_id')
         user = storage.get(User, data['user_id'])
         if not user:
             abort(404)
-        if 'user_id' not in data:
-            abort(400, 'Missing user_id')
         if 'text' not in data:
             abort(400, 'Missing text')
         data['place_id'] = place_id
