@@ -25,7 +25,7 @@ def get_places_of_city(city_id):
                     places_list.append(place.to_dict())
             return jsonify(places_list)
     elif request.method == 'POST':
-        if not request.json_get():
+        if not request.get_json():
             abort(400, 'Not a JSON')
         data = request.get_json()
         if not data:
@@ -75,4 +75,5 @@ def get_place_by_id(place_id):
         for k, v in data.items():
             if k not in ignor:
                 setattr(place, k, v)
+        place.save()
         return jsonify(place.to_dict())
